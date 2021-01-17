@@ -1,0 +1,22 @@
+{
+  "name": "mashov-api",
+  "version": "0.0.1",
+  "description": "MashovApi",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apophisss/MashovApi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Apophisss/MashovApi/issues"
+  },
+  "homepage": "https://github.com/Apophisss/MashovApi#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
