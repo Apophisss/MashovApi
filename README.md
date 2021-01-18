@@ -10,7 +10,9 @@ Interact with the Mashov app via node.js!
 npm i mashov-api
 ```
 
-## Basic Example 
+## Basic Examples
+
+### Get Grades. 
 ```js
 const mashov = require('mashov-api');
 // login to the mashov 
@@ -25,10 +27,45 @@ grades = await mashov.get(loginInfo, "grades");
 //and just print all of the grades
 console.log(grades)
 })
+```
+### Get Timetable. 
+```js
+const mashov = require('mashov-api');
+// login to the mashov 
+// You can look up your school semel in the mashov app when loging in,
+// and this year is         2021.
+//                          ^^^^
+mashov.loginToMashov(semel, year, username, password).then(async (logininfo) => {
+
+//get all of the user's timetable.
+timetable = await mashov.get(loginInfo, "timetable");
+
+//and just print the timetable.
+console.log(timetable)
+})
+
+```
+### Get 5 last mails. 
+```js
+const mashov = require('mashov-api');
+// login to the mashov 
+// You can look up your school semel in the mashov app when loging in,
+// and this year is         2021.
+//                          ^^^^
+mashov.loginToMashov(semel, year, username, password).then(async (logininfo) => {
+
+//get all of the user's mails.
+mails = await mashov.getMail(loginInfo, 5); // "5" is the amount of the mails.
+
+//and just print the mails.
+console.log(mails)
+})
 
 ```
 
-## Advanced Example
+
+## Advanced Examples
+### Average grades.
 ```js
 const mashov = require('mashov-api');
 // login to the mashov 
@@ -81,6 +118,57 @@ mashov.loginToMashov(semel, year, username, password).then(async (loginInfo) => 
 })
 
 ```
+### Timetable of the day map.
+```js
+const mashov = require('mashov-api');
+// login to the mashov 
+// You can look up your school semel in the mashov app when loging in,
+// and this year is         2021.
+//                          ^^^^
+mashov.loginToMashov(340216, 2021, 213646623, "oz231204").then(async (loginInfo) => {
+
+    //get user's timetable.
+    timetable = await mashov.get(loginInfo, "timetable");
+
+    //creates a map that will fill up with timetable by lessons.
+    var day = new Date().getDay() + 1
+    timeTableArray = {}
+    timetable.forEach(element => {
+        if (element["timeTable"]["day"] == day) {
+            if (timeTableArray[element["timeTable"]["lesson"]] == undefined) {
+                timeTableArray[element["timeTable"]["lesson"]] = {}
+                timeTableArray[element["timeTable"]["lesson"]]["lesson"] =
+                    element["timeTable"]["lesson"]
+                timeTableArray[element["timeTable"]["lesson"]]["name"] =
+                    element["groupDetails"]["subjectName"]
+                timeTableArray[element["timeTable"]["lesson"]]["teacher"] =
+                    element["groupDetails"]["groupTeachers"]["teacherName"]
+
+                if (element["timeTable"]["roomNum"] != '') {
+                    timeTableArray[element["timeTable"]["lesson"]]["place"] =
+                        element["timeTable"]["roomNum"]
+                }
+            } else {
+                timeTableArray[element["timeTable"]["lesson"]]["lesson"] =
+                    element["timeTable"]["lesson"]
+                timeTableArray[element["timeTable"]["lesson"]]["name"] =
+                    element["groupDetails"]["subjectName"]
+                timeTableArray[element["timeTable"]["lesson"]]["teacher"] =
+                    element["groupDetails"]["groupTeachers"][0]["teacherName"]
+                if (element["timeTable"]["roomNum"] != '') {
+                    timeTableArray[element["timeTable"]["lesson"]]["place"] =
+                        element["timeTable"]["roomNum"]
+                }
+            }
+
+        }
+    })
+
+    // then lets just print the map.
+    console.log(timeTableArray)
+})
+```
+
 
 ## Usage
 ```js

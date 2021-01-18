@@ -1,6 +1,6 @@
 {
   "name": "mashov-api",
-  "version": "0.9.0",
+  "version": "0.9.2",
   "description": "MashovApi",
   "main": "main.js",
   "scripts": {
