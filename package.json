@@ -1,17 +1,17 @@
 {
   "name": "mashov-api",
-  "version": "0.0.1",
+  "version": "0.9.0",
   "description": "MashovApi",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Apophisss/MashovApi.git"
   },
-  "keywords": [],
+  "keywords": ["mashov api", "mashov-api","mashov", "api", "israel","education"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Apophisss/MashovApi/issues"
   },
